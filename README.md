@@ -14,7 +14,7 @@ This fork was vibe coded with AI (OpenCode / Claude) as an experiment to see wha
 
 - **Musical notation rendering** — replaced text-based note labels with proper SMuFL music glyphs (Bravura font) so notes look like actual sheet music
 - **Metronome sound** — swapped the harsh wood block tick for a softer metronome click
-- **Proper deployment** — set up GitHub Pages on the fork so it actually works at a URL
+- **GitHub Pages** — deployed on a fork so it's accessible at a URL
 
 ### What hasn't been fixed
 
