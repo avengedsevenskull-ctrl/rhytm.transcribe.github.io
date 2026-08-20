@@ -1,6 +1,6 @@
 @font-face {
-	font-family: 'BravuraText';
-	src: url('../fonts/BravuraText.woff2') format('woff2');
+	font-family: 'Bravura';
+	src: url('../fonts/Bravura.woff2') format('woff2');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -93,7 +93,7 @@ table {
 	overflow: visible;
 }
 .note-glyph {
-	font-family: 'BravuraText', serif;
+	font-family: 'Bravura', serif;
 	font-size: 4rem;
 	line-height: 1;
 	color: #222;
