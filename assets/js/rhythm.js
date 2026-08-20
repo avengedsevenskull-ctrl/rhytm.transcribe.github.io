@@ -200,10 +200,53 @@ function closestNote(delays, i, interval, endIndex) {
 	return NOTE_TYPES[minIndex];
 }
 
+// SMuFL glyph codepoints for note rendering
+var GLYPHS = {
+	// Precomposed individual notes (include stem)
+	whole:       '\u{1D15D}',           // noteWhole (U+E1D2)
+	half:        '\u{1D15E}',           // noteHalfUp (U+E1D3)
+	quarter:     '\u{1D15F}',           // noteQuarterUp (U+E1D5)
+	eighth:      '\u{1D160}',           // note8thUp (U+E1D7)
+	sixteenth:   '\u{1D161}',           // note16thUp (U+E1D9)
+	// Combining characters
+	dot:         '\u{1D16D}',           // augmentationDot (U+E1E7)
+	flag1:       '\u{1D16E}',           // flag8thUp (U+E240)
+	flag2:       '\u{1D16F}',           // flag16thUp (U+E242)
+	// Noteheads (for combining with stems)
+	headBlack:   '\u{1D158}',           // noteheadBlack (U+E0A4)
+	headWhite:   '\u{1D15D}',           // noteheadWhite = noteWhole (U+E0A0 area)
+	// Bracket for triplets
+	bracketL:    '\uE014',              // staffPosBracketL
+	bracketR:    '\uE015',              // staffPosBracketR
+};
+
+function getGlyph(value) {
+	// Returns the HTML string for a note of the given beat value
+	switch(value) {
+		case 4:    return GLYPHS.whole;
+		case 3:    return GLYPHS.half + GLYPHS.dot;                    // dotted half
+		case 2.5:  return GLYPHS.half + GLYPHS.flag1;                 // half + eighth flag
+		case 2:    return GLYPHS.half;
+		case 1.5:  return GLYPHS.quarter + GLYPHS.dot;                // dotted quarter
+		case 1:    return GLYPHS.quarter;
+		case 0.75: return GLYPHS.quarter + GLYPHS.dot + GLYPHS.flag1; // dotted 8th
+		case 0.5:  return GLYPHS.quarter + GLYPHS.flag1;              // 8th (quarter head + flag)
+		case 0.25: return GLYPHS.quarter + GLYPHS.flag2;              // 16th (quarter head + 2 flags)
+		case 0.33: return GLYPHS.quarter + GLYPHS.flag1;              // triplet 8th
+		case 0.66: return GLYPHS.quarter;                             // triplet quarter
+		default:   return GLYPHS.quarter;
+	}
+}
+
 function drawNotes(notes) {
 	$('#staff').html("");
 	for (var n = 0; n < notes.length; n++) {
-		var note = $("<div class='note'>" + notes[n] + "</div>").appendTo("#staff");
-		note.css("width", notes[n]*6 + "rem");
+		var glyph = getGlyph(notes[n]);
+		var label = $("<div class='note'><span class='note-glyph'>" + glyph + "</span></div>").appendTo("#staff");
+		label.css("width", notes[n]*6 + "rem");
+		// Add triplet bracket for triplet values
+		if (notes[n] === 0.33 || notes[n] === 0.66) {
+			label.find('.note-glyph').append("<span style='font-size:0.8em;vertical-align:super;margin-left:-0.2em;'>³</span>");
+		}
 	}
 }

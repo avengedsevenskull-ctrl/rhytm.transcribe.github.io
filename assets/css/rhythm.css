@@ -1,13 +1,17 @@
+@font-face {
+	font-family: 'BravuraText';
+	src: url('../fonts/BravuraText.woff2') format('woff2');
+	font-weight: normal;
+	font-style: normal;
+}
+
 html {
 	font-size: 1em;
 }
-p, h1, .box, .note, #help, th {
+p, h1, .box, #help, th {
 	font-family: 'Slabo 27px', serif;
 	font-size: 2rem;
 	text-align: center;
-}
-.note {
-	font-size: 1rem;
 }
 tr:nth-child(1) {
 	background-color: #f2f2f2;
@@ -83,15 +87,19 @@ table {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	height: 2rem;
+	height: 4rem;
 	width: 4rem;
 	margin: 0.2rem;
-	background-color: deepskyblue;
-	border-radius: 0.5rem;
 	transition: opacity 0.2s;
 }
+.note-glyph {
+	font-family: 'BravuraText', serif;
+	font-size: 3rem;
+	line-height: 1;
+	color: #222;
+}
 .note:hover {
-	opacity: 0.8;
+	opacity: 0.6;
 }
 .modal:before {
   content: '';
