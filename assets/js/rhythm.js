@@ -243,10 +243,10 @@ function drawNotes(notes) {
 	for (var n = 0; n < notes.length; n++) {
 		var glyph = getGlyph(notes[n]);
 		var label = $("<div class='note'><span class='note-glyph'>" + glyph + "</span></div>").appendTo("#staff");
-		label.css("width", notes[n]*6 + "rem");
+		label.css("min-width", notes[n]*4 + "rem");
 		// Add triplet bracket for triplet values
 		if (notes[n] === 0.33 || notes[n] === 0.66) {
-			label.find('.note-glyph').append("<span style='font-size:0.8em;vertical-align:super;margin-left:-0.2em;'>³</span>");
+			label.find('.note-glyph').append("<span style='font-size:0.6em;vertical-align:super;margin-left:-0.15em;'>³</span>");
 		}
 	}
 }
